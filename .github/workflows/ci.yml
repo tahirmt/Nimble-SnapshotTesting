@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  verify-pods:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo gem install cocoapods
+      - run: pod lib lint
+
