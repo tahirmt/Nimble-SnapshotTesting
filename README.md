@@ -31,6 +31,22 @@ For swift package manager
 
 ```
 
+## Usage
+
+To use the library with `Nimble` you have two ways
+
+```
+let view = UIView()
+expect(view).to(haveValidSnapshot(as: .image))
+```
+
+or you can even use the `==` syntax
+
+```
+let view = UIView()
+expect(view) == snapshot(as: .image)
+```
+
 ## License
 
 Nimble-SnapshotTesting is available under the MIT license. See the LICENSE file for more info.
