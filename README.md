@@ -1,6 +1,6 @@
 # Nimble-SnapshotTesting
 
-[![CI Status](https://img.shields.io/travis/tahirmt/Nimble-SnapshotTesting.svg?style=flat)](https://travis-ci.org/tahirmt/Nimble-SnapshotTesting)
+[![CI](https://github.com/tahirmt/Nimble-SnapshotTesting/actions/workflows/ci.yml/badge.svg)](https://github.com/tahirmt/Nimble-SnapshotTesting/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/cocoapods/v/Nimble-SnapshotTesting.svg?style=flat)](https://cocoapods.org/pods/Nimble-SnapshotTesting)
 [![License](https://img.shields.io/cocoapods/l/Nimble-SnapshotTesting.svg?style=flat)](https://cocoapods.org/pods/Nimble-SnapshotTesting)
 [![Platform](https://img.shields.io/cocoapods/p/Nimble-SnapshotTesting.svg?style=flat)](https://cocoapods.org/pods/Nimble-SnapshotTesting)
