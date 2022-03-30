@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 import PackageDescription
 
 let package = Package(
@@ -10,8 +10,8 @@ let package = Package(
             targets: ["NimbleSnapshotTestingObjc"])
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
-                 .upToNextMajor(from: "1.9.0")),
+        .package(url: "https://github.com/krzysztofpawski/swift-snapshot-testing.git",
+                 branch: "support_tests_iterations"),
         .package(url: "https://github.com/Quick/Nimble.git",
                  .upToNextMajor(from: "9.0.0"))
     ],
