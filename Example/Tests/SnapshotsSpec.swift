@@ -13,6 +13,17 @@ class SnapshotsSpec: QuickSpec {
 
                 expect(testView).to(haveValidSnapshot(as: .image))
             }
+
+            it("should record a snapshot and work with toEventually") {
+                let testView = UILabel()
+                testView.text = "Hello world"
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                    testView.text = "Other world"
+                }
+
+                expect(testView).toEventuallyIfTestingSnapshots(haveValidSnapshot(as: .image, recordDelay: 0.3))
+            }
         }
     }
 }
