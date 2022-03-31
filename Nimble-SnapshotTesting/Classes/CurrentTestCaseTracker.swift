@@ -18,6 +18,11 @@ public final class CurrentTestCaseTracker: NSObject, XCTestObservation {
     }
 }
 
+/// The test case name for the currently running test
+public func currentTestCaseName() -> String? {
+    CurrentTestCaseTracker.shared.currentTestCase?.name
+}
+
 extension XCTestCase {
     var sanitizedName: String? {
         let fullName = self.name

@@ -10,6 +10,7 @@ DEPENDENCIES:
   - Nimble (~> 9.2.1)
   - Nimble-SnapshotTesting (from `../`)
   - Quick (~> 3.0.0)
+  - SnapshotTesting
 
 SPEC REPOS:
   trunk:
@@ -27,6 +28,6 @@ SPEC CHECKSUMS:
   Quick: 947834f0d0f43fc933d0e9dd00086a76e783e4fb
   SnapshotTesting: 6141c48b6aa76ead61431ca665c14ab9a066c53b
 
-PODFILE CHECKSUM: cf428a86dad694cca098e67b56d372647dc8e908
+PODFILE CHECKSUM: 18ef6e3dc81cdc1d5c7d271841a83908fef6b592
 
 COCOAPODS: 1.11.3

@@ -6,6 +6,7 @@ target 'Nimble-SnapshotTesting_Example' do
   target 'Nimble-SnapshotTesting_Tests' do
     inherit! :search_paths
 
+    pod 'SnapshotTesting'
     pod 'Nimble-SnapshotTesting', :path => '../'
     pod 'Quick', '~> 3.0.0'
     pod 'Nimble', '~> 9.2.1'
