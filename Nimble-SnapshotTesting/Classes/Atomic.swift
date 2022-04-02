@@ -1,10 +1,4 @@
-//
-//  Atomic.swift
-//
-//
-//  Created by Mahmood Tahir on 2022-03-30.
-//  Copyright © 2022 theScore Inc. All rights reserved.
-//
+import Foundation
 
 /// Wrapper for a value protected by a serial DispatchQueue
 @propertyWrapper
