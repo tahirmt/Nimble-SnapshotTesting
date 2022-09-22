@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Nimble-SnapshotTesting",
-    platforms: [.iOS(.v11), .tvOS(.v10), .macOS(.v10_10)],
+    platforms: [.iOS(.v13), .tvOS(.v13), .macOS(.v10_15)],
     products: [
         .library(
             name: "Nimble-SnapshotTesting",
@@ -11,9 +11,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
-                 .upToNextMajor(from: "1.9.0")),
+                 .upToNextMajor(from: "1.10.0")),
         .package(url: "https://github.com/Quick/Nimble.git",
-                 .upToNextMajor(from: "9.0.0"))
+                 .upToNextMajor(from: "10.0.0"))
     ],
     targets: [
         .target(
