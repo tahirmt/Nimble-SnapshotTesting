@@ -131,14 +131,15 @@ public extension AsyncDefaults {
     static var snapshotPollInterval: DispatchTimeInterval = .milliseconds(200)
 }
 
-public extension Expectation {
+public extension SyncExpectation {
     /// Uses `toEventually` to test the predicate only if the snapshot global recording mode is turned off. If the recording mode is on it will use a `to` expectation with the `recordingDelay`.
     /// - Parameters:
     ///   - predicate: The predicate to evaluate. Ideally, we should only use the `haveValidSnapshot` predicate here with a `recordingDelay`
     ///   - timeout: The timeout for the test
     ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
     ///   - description: Additional description for the test
-    func toEventuallyIfTestingSnapshots(_ predicate: Predicate<T>,
+    @available(*, noasync, message: "the sync version of `toEventuallyIfTestingSnapshots` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
+    func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
                                         timeout: DispatchTimeInterval = AsyncDefaults.timeout,
                                         pollInterval: DispatchTimeInterval = AsyncDefaults.snapshotPollInterval,
                                         description: String? = nil) {
@@ -147,6 +148,24 @@ public extension Expectation {
         }
         else {
             toEventually(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
+        }
+    }
+
+    /// Uses `toEventually` to test the predicate only if the snapshot global recording mode is turned off. If the recording mode is on it will use a `to` expectation with the `recordingDelay`.
+    /// - Parameters:
+    ///   - predicate: The predicate to evaluate. Ideally, we should only use the `haveValidSnapshot` predicate here with a `recordingDelay`
+    ///   - timeout: The timeout for the test
+    ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
+    ///   - description: Additional description for the test
+    func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
+                                        timeout: DispatchTimeInterval = AsyncDefaults.timeout,
+                                        pollInterval: DispatchTimeInterval = AsyncDefaults.snapshotPollInterval,
+                                        description: String? = nil) async {
+        if isRecordingSnapshots {
+            to(predicate, description: description)
+        }
+        else {
+            await toEventually(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
         }
     }
 }

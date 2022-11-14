@@ -64,7 +64,7 @@ public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>]
     )
 }
 
-public func == <Value, Format>(lhs: Expectation<Value>, rhs: Snapshot<Value, Format>) {
+public func == <Value, Format>(lhs: SyncExpectation<Value>, rhs: Snapshot<Value, Format>) {
     lhs.to(haveValidSnapshot(as: rhs.strategies,
                              named: rhs.name,
                              record: rhs.record,
