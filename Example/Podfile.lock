@@ -1,15 +1,15 @@
 PODS:
-  - Nimble (9.2.1)
-  - Nimble-SnapshotTesting (0.2.1):
+  - Nimble (11.2.0)
+  - Nimble-SnapshotTesting (1.10.1):
     - Nimble
     - SnapshotTesting
-  - Quick (3.0.1)
+  - Quick (6.0.1)
   - SnapshotTesting (1.9.0)
 
 DEPENDENCIES:
-  - Nimble (~> 9.2.1)
+  - Nimble (~> 11)
   - Nimble-SnapshotTesting (from `../`)
-  - Quick (~> 3.0.0)
+  - Quick (~> 6)
   - SnapshotTesting
 
 SPEC REPOS:
@@ -23,11 +23,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
-  Nimble-SnapshotTesting: 25e88a12cfc1801cd6e6d90b06e5f4b8cd6eec3c
-  Quick: 947834f0d0f43fc933d0e9dd00086a76e783e4fb
+  Nimble: cab2cc29436a378f595e8babd231440dfcb0a358
+  Nimble-SnapshotTesting: b540083fffcb47adf8e0e7827fb95466073db15a
+  Quick: abd15c0936cf347a5e36c51325697d12aebc3c5a
   SnapshotTesting: 6141c48b6aa76ead61431ca665c14ab9a066c53b
 
-PODFILE CHECKSUM: 18ef6e3dc81cdc1d5c7d271841a83908fef6b592
+PODFILE CHECKSUM: aa924c484b34970ce9905366b620c6c391088bb5
 
 COCOAPODS: 1.11.3
