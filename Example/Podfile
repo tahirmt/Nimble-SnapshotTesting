@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 target 'Nimble-SnapshotTesting_Example' do
   target 'Nimble-SnapshotTesting_Tests' do
@@ -8,7 +8,7 @@ target 'Nimble-SnapshotTesting_Example' do
 
     pod 'SnapshotTesting'
     pod 'Nimble-SnapshotTesting', :path => '../'
-    pod 'Quick', '~> 3.0.0'
-    pod 'Nimble', '~> 9.2.1'
+    pod 'Quick', '~> 6'
+    pod 'Nimble', '~> 11'
   end
 end
