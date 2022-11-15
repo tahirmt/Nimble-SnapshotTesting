@@ -27,7 +27,7 @@ pod 'Nimble-SnapshotTesting'
 For swift package manager
 
 ```
-.package(url: "https://github.com/tahirmt/Nimble-SnapshotTesting.git", .upToNextMajor(from: "0.2.1")),
+.package(url: "https://github.com/tahirmt/Nimble-SnapshotTesting.git", .upToNextMajor(from: "2.0.0")),
 
 ```
 
