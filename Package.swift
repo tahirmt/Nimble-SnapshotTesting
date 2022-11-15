@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
                  .upToNextMajor(from: "1.10.0")),
         .package(url: "https://github.com/Quick/Nimble.git",
-                 .upToNextMajor(from: "10.0.0"))
+                 .upToNextMajor(from: "11.2.0"))
     ],
     targets: [
         .target(
