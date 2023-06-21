@@ -126,9 +126,9 @@ public func haveValidSnapshot<Value, Format>(
 
 // MARK: - toEventually helpers
 
-public extension AsyncDefaults {
+public extension PollingDefaults {
     /// Default poll interval used for snapshot `toEventuallyIfTestingSnapshot` expectation.
-    static var snapshotPollInterval: DispatchTimeInterval = .milliseconds(200)
+    static var snapshotPollInterval: NimbleTimeInterval = .milliseconds(200)
 }
 
 public extension SyncExpectation {
@@ -140,8 +140,8 @@ public extension SyncExpectation {
     ///   - description: Additional description for the test
     @available(*, noasync, message: "the sync version of `toEventuallyIfTestingSnapshots` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
     func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
-                                        timeout: DispatchTimeInterval = AsyncDefaults.timeout,
-                                        pollInterval: DispatchTimeInterval = AsyncDefaults.snapshotPollInterval,
+                                        timeout: NimbleTimeInterval = PollingDefaults.timeout,
+                                        pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) {
         if isRecordingSnapshots {
             to(predicate, description: description)
@@ -158,8 +158,8 @@ public extension SyncExpectation {
     ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
     ///   - description: Additional description for the test
     func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
-                                        timeout: DispatchTimeInterval = AsyncDefaults.timeout,
-                                        pollInterval: DispatchTimeInterval = AsyncDefaults.snapshotPollInterval,
+                                        timeout: NimbleTimeInterval = PollingDefaults.timeout,
+                                        pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) async {
         if isRecordingSnapshots {
             to(predicate, description: description)
