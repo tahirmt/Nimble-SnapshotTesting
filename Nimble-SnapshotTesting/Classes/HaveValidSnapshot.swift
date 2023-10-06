@@ -58,7 +58,7 @@ public func haveValidSnapshot<Value, Format>(
     testName: String? = nil,
     line: UInt = #line,
     function: String = #function
-) -> Predicate<Value> {
+) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
                       record: record,
@@ -93,10 +93,10 @@ public func haveValidSnapshot<Value, Format>(
     testName: String? = nil,
     line: UInt = #line,
     function: String = #function
-) -> Predicate<Value> {
-    return Predicate { actualExpression in
+) -> Matcher<Value> {
+    return Matcher { actualExpression in
         guard let value = try actualExpression.evaluate() else {
-            return PredicateResult(status: .fail, message: .fail("have valid snapshot"))
+            return MatcherResult(status: .fail, message: .fail("have valid snapshot"))
         }
 
         let testName = testName ?? CurrentTestCaseTracker.shared.currentTestCase?.sanitizedName ?? function
@@ -117,7 +117,7 @@ public func haveValidSnapshot<Value, Format>(
             }
         }
 
-        return PredicateResult(
+        return MatcherResult(
             bool: failureMessages.isEmpty,
             message: .fail(failureMessages.joined(separator: ",\n"))
         )
@@ -139,7 +139,7 @@ public extension SyncExpectation {
     ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
     ///   - description: Additional description for the test
     @available(*, noasync, message: "the sync version of `toEventuallyIfTestingSnapshots` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
+    func toEventuallyIfTestingSnapshots(_ predicate: Matcher<Value>,
                                         timeout: NimbleTimeInterval = PollingDefaults.timeout,
                                         pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) {
@@ -157,7 +157,7 @@ public extension SyncExpectation {
     ///   - timeout: The timeout for the test
     ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
     ///   - description: Additional description for the test
-    func toEventuallyIfTestingSnapshots(_ predicate: Predicate<Value>,
+    func toEventuallyIfTestingSnapshots(_ predicate: Matcher<Value>,
                                         timeout: NimbleTimeInterval = PollingDefaults.timeout,
                                         pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) async {
@@ -193,7 +193,7 @@ public func haveValidSnapshot<Value, Format>(
     testName: String? = nil,
     line: UInt = #line,
     function: String = #function
-) -> Predicate<Value> {
+) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
                       record: record,
@@ -257,7 +257,7 @@ public func haveValidSnapshot<Value, Format>(
     testName: String? = nil,
     line: UInt = #line,
     function: String = #function
-) -> Predicate<Value> {
+) -> Matcher<Value> {
     if SnapshotTesting.isRecording || record {
         return haveValidSnapshot(as: strategies.map { .wait(for: recordDelay, on: $0) },
                                  named: name,
