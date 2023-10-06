@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Nimble-SnapshotTesting'
-  s.version          = '4.0.0'
+  s.version          = '4.0.0-rc1'
   s.summary          = 'A Nimble matcher for snapshot testing'
   s.description      = <<-DESC
   A Nimble matcher for snapshot testing library.
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/tahirmt/Nimble-SnapshotTesting'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Mahmood Tahir' => 'matsoft90@gmail.com' }
-  s.source           = { :git => 'https://github.com/tahirmt/Nimble-SnapshotTesting.git', :tag => "v#{s.version.to_s}-rc1" }
+  s.source           = { :git => 'https://github.com/tahirmt/Nimble-SnapshotTesting.git', :tag => "v#{s.version.to_s}" }
 
   s.frameworks = "Foundation", "XCTest", "UIKit"
   s.dependency "SnapshotTesting"
