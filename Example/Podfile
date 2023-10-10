@@ -9,6 +9,6 @@ target 'Nimble-SnapshotTesting_Example' do
     pod 'SnapshotTesting'
     pod 'Nimble-SnapshotTesting', :path => '../'
     pod 'Quick', '~> 7'
-    pod 'Nimble', '~> 13.0.0-rc.1'
+    pod 'Nimble', '~> 13.0.0'
   end
 end
