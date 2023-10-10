@@ -1,6 +1,6 @@
 PODS:
   - Nimble (13.0.0)
-  - Nimble-SnapshotTesting (4.0.0):
+  - Nimble-SnapshotTesting (4.0.1):
     - Nimble (~> 13.0.0)
     - SnapshotTesting
   - Quick (7.3.0)
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Nimble: 97d90931cca412a23224ff29e258809f75c258f7
-  Nimble-SnapshotTesting: 95c1ec69d0745dcb304b79d55ab38e6f5a781f0a
+  Nimble-SnapshotTesting: 812c34b2d3ab83ed9c6f6311e5a277464ed03816
   Quick: d32871931c05547cb4e0bc9009d66a18b50d8558
   SnapshotTesting: 6141c48b6aa76ead61431ca665c14ab9a066c53b
 
