@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
-                 .upToNextMajor(from: "1.10.0")),
+                 .exactItem("1.16.2")),
         .package(url: "https://github.com/Quick/Nimble.git",
                  .upToNextMajor(from: "13.0.0"))
     ],
