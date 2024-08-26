@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/mattgallagher/CwlCatchException.git",
         "state": {
           "branch": null,
-          "revision": "35f9e770f54ce62dd8526470f14c6e137cef3eea",
-          "version": "2.1.1"
+          "revision": "3ef6999c73b6938cc0da422f2c912d0158abb0a0",
+          "version": "2.2.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
         "state": {
           "branch": null,
-          "revision": "c21f7bab5ca8eee0a9998bbd17ca1d0eb45d4688",
-          "version": "2.1.0"
+          "revision": "2ef56b2caf25f55fa7eef8784c30d5a767550f54",
+          "version": "2.2.1"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
           "branch": null,
-          "revision": "d616f15123bfb36db1b1075153f73cf40605b39d",
-          "version": "13.0.0"
+          "revision": "54b4e52183f16fe806014cbfd63718a84f8ba072",
+          "version": "13.4.0"
         }
       },
       {
@@ -33,8 +33,17 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
         "state": {
           "branch": null,
-          "revision": "f29e2014f6230cf7d5138fc899da51c7f513d467",
-          "version": "1.10.0"
+          "revision": "6d932a79e7173b275b96c600c86c603cf84f153c",
+          "version": "1.17.4"
+        }
+      },
+      {
+        "package": "swift-syntax",
+        "repositoryURL": "https://github.com/swiftlang/swift-syntax",
+        "state": {
+          "branch": null,
+          "revision": "515f79b522918f83483068d99c68daeb5116342d",
+          "version": "600.0.0-prerelease-2024-08-20"
         }
       }
     ]

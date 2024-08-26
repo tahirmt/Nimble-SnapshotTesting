@@ -17,7 +17,7 @@ public var isRecordingSnapshots: Bool {
 
 /// Configure failure messages for the given diff tool for `SnapshotTesting`. For example for Kleidoscope use `ksdiff`
 /// - Parameter diffTool: diff tool command name
-public func setSnapshotDiffTool(_ diffTool: String?) {
+public func setSnapshotDiffTool(_ diffTool: SnapshotTestingConfiguration.DiffTool) {
     SnapshotTesting.diffTool = diffTool
 }
 
