@@ -1,25 +1,10 @@
 import Foundation
 import Nimble
-import SnapshotTesting
-
-/// Set the global recording mode for `SnapshotTesting`
-/// - Parameter record: The new value of recording mode
-@available(*, deprecated, renamed: "isRecordingSnapshots")
-public func setSnapshotRecordingMode(_ record: Bool) {
-    SnapshotTesting.isRecording = record
-}
+@_exported import SnapshotTesting
 
 /// The global recording mode for all snapshot tests
-public var isRecordingSnapshots: Bool {
-    get { SnapshotTesting.isRecording }
-    set { SnapshotTesting.isRecording = newValue }
-}
-
-/// Configure failure messages for the given diff tool for `SnapshotTesting`. For example for Kleidoscope use `ksdiff`
-/// - Parameter diffTool: diff tool command name
-public func setSnapshotDiffTool(_ diffTool: String?) {
-    SnapshotTesting.diffTool = diffTool
-}
+nonisolated(unsafe) public var isRecordingSnapshots: Bool = false
+// we are assuming the risk of modifying it from differen threads
 
 /// A counter is used internally for keeping track of unique test cases. Otherwise, we would end up with the library recording
 /// new snapshots at every poll interval.
@@ -61,7 +46,7 @@ public func haveValidSnapshot<Value, Format>(
 ) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
-                      record: record,
+                      record: isRecordingSnapshots || record,
                       snapshotDirectory: snapshotDirectory,
                       timeout: timeout,
                       file: file,
@@ -104,10 +89,10 @@ public func haveValidSnapshot<Value, Format>(
         var failureMessages: [String] = []
 
         for strategy in strategies {
-            if let errorMessage = verifySnapshot(matching: value,
+            if let errorMessage = verifySnapshot(of: value,
                                                  as: strategy,
                                                  named: name ?? testCaseIdentifier(line: line),
-                                                 record: record,
+                                                 record: isRecordingSnapshots || record,
                                                  timeout: timeout,
                                                  file: file,
                                                  testName: testName,
@@ -196,7 +181,7 @@ public func haveValidSnapshot<Value, Format>(
 ) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
-                      record: record,
+                      record: isRecordingSnapshots || record,
                       recordDelay: recordDelay,
                       snapshotDirectory: snapshotDirectory,
                       timeout: timeout,
@@ -258,10 +243,11 @@ public func haveValidSnapshot<Value, Format>(
     line: UInt = #line,
     function: String = #function
 ) -> Matcher<Value> {
-    if SnapshotTesting.isRecording || record {
+    
+    if isRecordingSnapshots || record {
         return haveValidSnapshot(as: strategies.map { .wait(for: recordDelay, on: $0) },
                                  named: name,
-                                 record: record,
+                                 record: isRecordingSnapshots || record,
                                  snapshotDirectory: snapshotDirectory,
                                  timeout: timeout,
                                  file: file,
@@ -272,7 +258,7 @@ public func haveValidSnapshot<Value, Format>(
     else {
         return haveValidSnapshot(as: strategies,
                                  named: name,
-                                 record: record,
+                                 record: isRecordingSnapshots || record,
                                  snapshotDirectory: snapshotDirectory,
                                  timeout: timeout,
                                  file: file,

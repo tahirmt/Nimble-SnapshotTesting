@@ -11,13 +11,15 @@ import Nimble
 import Nimble_SnapshotTesting
 import UIKit
 import SwiftUI
+import SnapshotTesting
 
 final class SnapshotSpec: QuickSpec {
-    override func spec() {
+    override class func spec() {
         describe("a SnapshotSpec") {
             context("recording snapshots") {
                 it("shoud record") {
                     let testLabel = UILabel()
+                    testLabel.backgroundColor = .black
                     testLabel.text = "Hello World"
 
                     expect(testLabel).to(haveValidSnapshot(as: .image))
@@ -25,6 +27,7 @@ final class SnapshotSpec: QuickSpec {
 
                 it("should support == syntax") {
                     let other = UILabel()
+                    other.backgroundColor = .black
                     other.text = "Hello testing"
 
                     expect(other) == snapshot(on: .image)
@@ -41,6 +44,39 @@ final class SnapshotSpec: QuickSpec {
                         .frame(width: 200, height: 50, alignment: .center)
 
                     expect(view).to(haveValidSnapshot(as: .image))
+                }
+
+                it("should record window") {
+                    let window = UIWindow()
+                    window.backgroundColor = .white
+                    window.isHidden = false
+                    window.frame = CGRect(origin: .zero, size: .init(width: 300, height: 500))
+                    let viewController = UIViewController()
+                    window.rootViewController = viewController
+                    let view = UIButton(type: .contactAdd)
+                    view.sizeToFit()
+                    viewController.view.addSubview(view)
+
+                    expect(window).to(haveValidSnapshot(as: .image))
+
+                    viewController.view.backgroundColor = .blue
+                    expect(window).to(haveValidSnapshot(as: .image))
+                }
+
+                it("should record window without root") {
+                    let window = UIWindow()
+                    window.backgroundColor = .white
+                    window.isHidden = false
+                    window.frame = CGRect(origin: .zero, size: .init(width: 300, height: 500))
+
+                    let view = UIButton(type: .contactAdd)
+                    view.sizeToFit()
+                    window.addSubview(view)
+
+                    expect(window).to(haveValidSnapshot(as: .image))
+
+                    window.backgroundColor = .blue
+                    expect(window).to(haveValidSnapshot(as: .image))
                 }
             }
         }

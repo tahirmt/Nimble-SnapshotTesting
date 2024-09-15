@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Nimble-SnapshotTesting'
-  s.version          = '4.0.4'
+  s.version          = '4.1.0'
   s.summary          = 'A Nimble matcher for snapshot testing'
   s.description      = <<-DESC
   A Nimble matcher for snapshot testing library.

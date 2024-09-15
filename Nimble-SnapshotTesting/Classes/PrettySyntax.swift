@@ -39,7 +39,7 @@ public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
                                     function: String = #function) -> Snapshot<Value, Format> {
     snapshot(on: [strategy],
              name: name,
-             record: record,
+             record: isRecordingSnapshots || record,
              timeout: timeout,
              file: file,
              line: line,
@@ -56,7 +56,7 @@ public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>]
                                     function: String = #function) -> Snapshot<Value, Format> {
     Snapshot(on: strategies,
              name: name,
-             record: record,
+             record: isRecordingSnapshots || record,
              timeout: timeout,
              file: file,
              line: line,
