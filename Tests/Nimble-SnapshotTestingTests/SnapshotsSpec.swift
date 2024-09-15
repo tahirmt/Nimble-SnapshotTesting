@@ -1,25 +1,24 @@
 //
-//  SnapshotSpec.swift
-//  Example-SPMTests
+//  SnapshotsSpecs.swift
+//  Nimble-SnapshotTesting
 //
-//  Created by Mahmood Tahir on 2022-03-23.
+//  Created by Mahmood Tahir on 2024-09-14.
 //
 
 import Foundation
-import Quick
-import Nimble
 import Nimble_SnapshotTesting
+import Quick
 import UIKit
+import Nimble
 import SwiftUI
-import SnapshotTesting
 
-final class SnapshotSpec: QuickSpec {
+@available(iOS 14.0, *)
+final class SnapshotsSpecs: QuickSpec {
     override class func spec() {
         describe("a SnapshotSpec") {
             context("recording snapshots") {
                 it("shoud record") {
                     let testLabel = UILabel()
-                    testLabel.backgroundColor = .black
                     testLabel.text = "Hello World"
 
                     expect(testLabel).to(haveValidSnapshot(as: .image))
@@ -27,7 +26,6 @@ final class SnapshotSpec: QuickSpec {
 
                 it("should support == syntax") {
                     let other = UILabel()
-                    other.backgroundColor = .black
                     other.text = "Hello testing"
 
                     expect(other) == snapshot(on: .image)
@@ -83,6 +81,7 @@ final class SnapshotSpec: QuickSpec {
     }
 }
 
+@available(iOS 14.0, *)
 private struct TestView: View {
     var body: some View {
         HStack {

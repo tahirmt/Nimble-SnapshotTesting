@@ -396,6 +396,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
 			};
 			name = Debug;
 		};
@@ -449,6 +450,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -626,7 +628,7 @@
 			repositoryURL = "https://github.com/quick/quick.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 7.0.0;
 			};
 		};
 		C8C1596827EC1ED0002296AF /* XCRemoteSwiftPackageReference "nimble" */ = {
@@ -634,7 +636,7 @@
 			repositoryURL = "https://github.com/quick/nimble";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.2.1;
+				minimumVersion = 13.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

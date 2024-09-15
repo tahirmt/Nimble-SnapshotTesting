@@ -13,7 +13,8 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
                  .upToNextMajor(from: "1.10.0")),
         .package(url: "https://github.com/Quick/Nimble.git",
-                 .upToNextMajor(from: "13.0.0"))
+                 .upToNextMajor(from: "13.0.0")),
+        .package(url: "https://github.com/Quick/Quick.git", from: "7.0.0"),
     ],
     targets: [
         .target(
@@ -21,21 +22,23 @@ let package = Package(
             dependencies: [
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
                 "Nimble"
-            ],
-            path: "Nimble-SnapshotTesting",
-            exclude: [
-                "Classes/Objc",
-            ],
-            sources: ["Classes"]
+            ]
         ),
         .target(
             name: "NimbleSnapshotTestingObjc",
             dependencies: [
                 "Nimble-SnapshotTesting"
+            ]
+        ),
+        .testTarget(
+            name: "Nimble-SnapshotTestingTests",
+            dependencies: [
+                "NimbleSnapshotTestingObjc",
+                .product(name: "Quick", package: "Quick"),
+                .product(name: "Nimble", package: "Nimble"),
             ],
-            path: "Nimble-SnapshotTesting",
-            sources: [
-                "Classes/Objc"
+            exclude: [
+                "__Snapshots__"
             ]
         )
     ]
