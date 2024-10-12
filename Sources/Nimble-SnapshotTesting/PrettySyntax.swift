@@ -7,7 +7,7 @@ import SnapshotTesting
 public struct Snapshot<Value, Format> {
     let strategies: [Snapshotting<Value, Format>]
     let name: String?
-    let record: Bool
+    let record: Bool?
     let timeout: TimeInterval
     let file: StaticString
     let line: UInt
@@ -15,7 +15,7 @@ public struct Snapshot<Value, Format> {
 
     public init(on strategies: [Snapshotting<Value, Format>],
                 name: String? = nil,
-                record: Bool = false,
+                record: Bool? = nil,
                 timeout: TimeInterval = 5,
                 file: StaticString = #file,
                 line: UInt = #line,
@@ -32,14 +32,14 @@ public struct Snapshot<Value, Format> {
 
 public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
                                     name: String? = nil,
-                                    record: Bool = false,
+                                    record: Bool? = nil,
                                     timeout: TimeInterval = 5,
                                     file: StaticString = #file,
                                     line: UInt = #line,
                                     function: String = #function) -> Snapshot<Value, Format> {
     snapshot(on: [strategy],
              name: name,
-             record: isRecordingSnapshots || record,
+             record: isRecordingSnapshots ?? record,
              timeout: timeout,
              file: file,
              line: line,
@@ -49,14 +49,14 @@ public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
 
 public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>],
                                     name: String? = nil,
-                                    record: Bool = false,
+                                    record: Bool? = nil,
                                     timeout: TimeInterval = 5,
                                     file: StaticString = #file,
                                     line: UInt = #line,
                                     function: String = #function) -> Snapshot<Value, Format> {
     Snapshot(on: strategies,
              name: name,
-             record: isRecordingSnapshots || record,
+             record: isRecordingSnapshots ?? record,
              timeout: timeout,
              file: file,
              line: line,

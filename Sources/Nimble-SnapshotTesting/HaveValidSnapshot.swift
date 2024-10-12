@@ -3,7 +3,7 @@ import Nimble
 @_exported import SnapshotTesting
 
 /// The global recording mode for all snapshot tests
-nonisolated(unsafe) public var isRecordingSnapshots: Bool = false
+nonisolated(unsafe) public var isRecordingSnapshots: Bool? = nil
 // we are assuming the risk of modifying it from differen threads
 
 /// A counter is used internally for keeping track of unique test cases. Otherwise, we would end up with the library recording
@@ -36,7 +36,7 @@ private enum Counter {
 public func haveValidSnapshot<Value, Format>(
     as strategy: Snapshotting<Value, Format>,
     named name: String? = nil,
-    record: Bool = false,
+    record: Bool? = nil,
     snapshotDirectory: String? = nil,
     timeout: TimeInterval = 5,
     file: StaticString = #file,
@@ -46,7 +46,7 @@ public func haveValidSnapshot<Value, Format>(
 ) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
-                      record: isRecordingSnapshots || record,
+                      record: isRecordingSnapshots ?? record,
                       snapshotDirectory: snapshotDirectory,
                       timeout: timeout,
                       file: file,
@@ -71,7 +71,7 @@ public func haveValidSnapshot<Value, Format>(
 public func haveValidSnapshot<Value, Format>(
     as strategies: [Snapshotting<Value, Format>],
     named name: String? = nil,
-    record: Bool = false,
+    record: Bool? = nil,
     snapshotDirectory: String? = nil,
     timeout: TimeInterval = 5,
     file: StaticString = #file,
@@ -92,7 +92,7 @@ public func haveValidSnapshot<Value, Format>(
             if let errorMessage = verifySnapshot(of: value,
                                                  as: strategy,
                                                  named: name ?? testCaseIdentifier(line: line),
-                                                 record: isRecordingSnapshots || record,
+                                                 record: isRecordingSnapshots ?? record,
                                                  timeout: timeout,
                                                  file: file,
                                                  testName: testName,
@@ -128,7 +128,7 @@ public extension SyncExpectation {
                                         timeout: NimbleTimeInterval = PollingDefaults.timeout,
                                         pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) {
-        if isRecordingSnapshots {
+        if isRecordingSnapshots == true {
             to(matcher, description: description)
         }
         else {
@@ -146,7 +146,7 @@ public extension SyncExpectation {
                                         timeout: NimbleTimeInterval = PollingDefaults.timeout,
                                         pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
                                         description: String? = nil) async {
-        if isRecordingSnapshots {
+        if isRecordingSnapshots == true {
             to(matcher, description: description)
         }
         else {
@@ -181,7 +181,7 @@ public func haveValidSnapshot<Value, Format>(
 ) -> Matcher<Value> {
     haveValidSnapshot(as: [strategy],
                       named: name,
-                      record: isRecordingSnapshots || record,
+                      record: isRecordingSnapshots ?? record,
                       recordDelay: recordDelay,
                       snapshotDirectory: snapshotDirectory,
                       timeout: timeout,
@@ -244,10 +244,10 @@ public func haveValidSnapshot<Value, Format>(
     function: String = #function
 ) -> Matcher<Value> {
     
-    if isRecordingSnapshots || record {
+    if (isRecordingSnapshots ?? record) == true {
         return haveValidSnapshot(as: strategies.map { .wait(for: recordDelay, on: $0) },
                                  named: name,
-                                 record: isRecordingSnapshots || record,
+                                 record: isRecordingSnapshots ?? record,
                                  snapshotDirectory: snapshotDirectory,
                                  timeout: timeout,
                                  file: file,
@@ -258,7 +258,7 @@ public func haveValidSnapshot<Value, Format>(
     else {
         return haveValidSnapshot(as: strategies,
                                  named: name,
-                                 record: isRecordingSnapshots || record,
+                                 record: isRecordingSnapshots ?? record,
                                  snapshotDirectory: snapshotDirectory,
                                  timeout: timeout,
                                  file: file,
