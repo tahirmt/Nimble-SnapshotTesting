@@ -170,7 +170,7 @@ public extension SyncExpectation {
 public func haveValidSnapshot<Value, Format>(
     as strategy: Snapshotting<Value, Format>,
     named name: String? = nil,
-    record: Bool = false,
+    record: Bool? = nil,
     recordDelay: TimeInterval,
     snapshotDirectory: String? = nil,
     timeout: TimeInterval = 5,
@@ -234,7 +234,7 @@ private func testCaseIdentifier(line: UInt) -> String {
 public func haveValidSnapshot<Value, Format>(
     as strategies: [Snapshotting<Value, Format>],
     named name: String? = nil,
-    record: Bool = false,
+    record: Bool? = nil,
     recordDelay: TimeInterval,
     snapshotDirectory: String? = nil,
     timeout: TimeInterval = 5,
@@ -243,7 +243,7 @@ public func haveValidSnapshot<Value, Format>(
     line: UInt = #line,
     function: String = #function
 ) -> Matcher<Value> {
-    
+
     if (isRecordingSnapshots ?? record) == true {
         return haveValidSnapshot(as: strategies.map { .wait(for: recordDelay, on: $0) },
                                  named: name,
