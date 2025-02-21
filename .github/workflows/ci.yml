@@ -16,6 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: sudo xcode-select -s /Applications/Xcode_16.2.0.app
-      - run: xcodebuild test -scheme Nimble-SnapshotTesting -destination 'platform=iOS Simulator,OS=18.2,name=iPhone 16 Pro'
+      - run: sudo xcode-select -s /Applications/Xcode_16.1.0.app
+      - run: xcodebuild test -scheme Nimble-SnapshotTesting -destination 'platform=iOS Simulator,OS=18.1,name=iPhone 16 Pro'
 
