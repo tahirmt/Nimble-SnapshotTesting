@@ -1,0 +1,51 @@
+{
+  "configurations" : [
+    {
+      "id" : "28191109-AD7F-4565-B5D7-2F2F91227910",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "SNAPSHOT_TESTING_RECORD",
+        "value" : "failed"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Example-SPM.xcodeproj",
+      "identifier" : "C8C1592D27EC1DEF002296AF",
+      "name" : "Example-SPM"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "Nimble-SnapshotTestingTests",
+        "name" : "Nimble-SnapshotTestingTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Example-SPM.xcodeproj",
+        "identifier" : "C8C1594327EC1DF0002296AF",
+        "name" : "Example-SPMTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Example-SPM.xcodeproj",
+        "identifier" : "C8C1594D27EC1DF0002296AF",
+        "name" : "Example-SPMUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

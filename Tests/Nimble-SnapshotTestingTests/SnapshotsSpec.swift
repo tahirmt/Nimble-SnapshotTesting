@@ -5,6 +5,7 @@
 //  Created by Mahmood Tahir on 2024-09-14.
 //
 
+#if os(iOS)
 import Foundation
 import Nimble_SnapshotTesting
 import Quick
@@ -97,3 +98,4 @@ private struct TestCodable: Codable {
     let stringValue: String
     let number: Int
 }
+#endif
