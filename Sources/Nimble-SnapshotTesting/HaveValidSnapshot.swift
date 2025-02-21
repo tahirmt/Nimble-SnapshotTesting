@@ -93,6 +93,7 @@ public func haveValidSnapshot<Value, Format>(
                                                  as: strategy,
                                                  named: name ?? testCaseIdentifier(line: line),
                                                  record: isRecordingSnapshots ?? record,
+                                                 snapshotDirectory: snapshotDirectory,
                                                  timeout: timeout,
                                                  file: file,
                                                  testName: testName,
