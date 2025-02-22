@@ -8,25 +8,18 @@ A Nimble matcher for https://github.com/pointfreeco/swift-snapshot-testing inspi
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+The example project exists at `Example-SPM` however it is not necessary. 
 
 ## Requirements
 
-Cocoapods or Swift 5.3 or later for swift package manager
+Swift 5.9 or later for swift package manager
 
 ## Installation
-
-Nimble-SnapshotTesting is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'Nimble-SnapshotTesting'
-```
 
 For swift package manager
 
 ```
-.package(url: "https://github.com/tahirmt/Nimble-SnapshotTesting.git", .upToNextMajor(from: "2.0.0")),
+.package(url: "https://github.com/tahirmt/Nimble-SnapshotTesting.git", from: "4.0.0"),
 
 ```
 
