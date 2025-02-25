@@ -18,7 +18,7 @@ private enum Counter {
         let line: UInt
         let count: UInt
     }
-    @Atomic static var identifiersMap: [String: Info] = [:]
+    @Atomic static var identifiersMap: [String: [Info]] = [:]
 }
 
 /// Validates the given `Value` using the `strategy` against a pre-recorded snapshot or records a new snapshot
@@ -199,17 +199,19 @@ private func testCaseIdentifier(line: UInt) -> String {
     let count: UInt
 
     if let identifier = currentTestCaseName() {
-        let iteration = Counter.identifiersMap[identifier, default: .init(line: line, count: 1)]
+        var iterations = Counter.identifiersMap[identifier, default: []]
 
-        if iteration.line != line {
-            count = iteration.count + 1
-        }
-        else {
-            count = iteration.count
+        if let existing = iterations.first(where: { $0.line == line }) {
+            count = existing.count
+        } else {
+            let largestCount = iterations.max(by: { $0.count < $1.count })?.count ?? 0
+            let iteration = Counter.Info(line: line, count: largestCount+1)
+            iterations.append(iteration)
+            count = largestCount + 1
         }
 
         Counter.$identifiersMap.mutate {
-            $0[identifier] = .init(line: line, count: count)
+            $0[identifier] = iterations
         }
     }
     else {
