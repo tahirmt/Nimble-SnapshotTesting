@@ -12,6 +12,7 @@ import Quick
 import UIKit
 import Nimble
 import SwiftUI
+import XCTest
 
 @available(iOS 14.0, *)
 final class SnapshotsSpecs: QuickSpec {
@@ -30,6 +31,17 @@ final class SnapshotsSpecs: QuickSpec {
                     other.text = "Hello testing"
 
                     expect(other) == snapshot(on: .image)
+                }
+
+                it("should work with toEventually") {
+                    let other = UILabel()
+                    other.text = "Hello testing"
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        other.text = "Hello testing again"
+                    }
+
+                    expect(other).toEventually(haveValidSnapshot(as: .image))
                 }
 
                 it("should record snapshot of a codable") {
