@@ -15,6 +15,7 @@ public final class CurrentTestCaseTracker: NSObject, XCTestObservation {
     @objc
     public func testCaseDidFinish(_ testCase: XCTestCase) {
         currentTestCase = nil
+        Counter.reset()
     }
 }
 

@@ -13,12 +13,18 @@ nonisolated(unsafe) public var isRecordingSnapshots: Bool? = nil
 ///
 /// The counter is kept similar to how `SnapshotTesting` does it internally so if someone replaces the `toEventually` test with `to`
 /// it will use the same identifiers.
-private enum Counter {
+enum Counter {
     struct Info {
         let line: UInt
         let count: UInt
     }
     @Atomic static var identifiersMap: [String: [Info]] = [:]
+
+    static func reset() {
+        $identifiersMap.mutate {
+            $0.removeAll()
+        }
+    }
 }
 
 /// Validates the given `Value` using the `strategy` against a pre-recorded snapshot or records a new snapshot
