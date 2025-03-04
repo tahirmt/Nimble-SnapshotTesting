@@ -29,8 +29,8 @@ final class SnapshotsSpecs: QuickSpec {
                 it("should support == syntax") {
                     let other = UILabel()
                     other.text = "Hello testing"
-
-                    expect(other) == snapshot(on: .image)
+                    
+                    expect(other) == snapshot(as: .image)
                 }
 
                 it("should work with toEventually") {
@@ -47,7 +47,7 @@ final class SnapshotsSpecs: QuickSpec {
                 it("should record snapshot of a codable") {
                     let object = TestCodable(stringValue: "What is the meaning of life", number: 42)
 
-                    expect(object) == snapshot(on: .json)
+                    expect(object) == snapshot(as: .json)
                 }
 
                 it("should record snapshot of a SwiftUI view") {
