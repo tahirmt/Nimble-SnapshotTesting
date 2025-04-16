@@ -48,7 +48,7 @@ public struct Snapshot<Value, Format> {
 }
 
 @available(*, deprecated, renamed: "snapshot(as:name:record:timeout:file:line:function:)", message: "Renamed to align initializer name with haveValidSnapshot method")
-public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
+@MainActor public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
                                     name: String? = nil,
                                     record: Bool? = nil,
                                     timeout: TimeInterval = 5,
@@ -65,7 +65,7 @@ public func snapshot<Value, Format>(on strategy: Snapshotting<Value, Format>,
     )
 }
 
-public func snapshot<Value, Format>(as strategy: Snapshotting<Value, Format>,
+@MainActor public func snapshot<Value, Format>(as strategy: Snapshotting<Value, Format>,
                                     name: String? = nil,
                                     record: Bool? = nil,
                                     timeout: TimeInterval = 5,
@@ -83,7 +83,7 @@ public func snapshot<Value, Format>(as strategy: Snapshotting<Value, Format>,
 }
 
 @available(*, deprecated, renamed: "snapshot(as:name:record:timeout:file:line:function:)", message: "Renamed to align initializer name with haveValidSnapshot method")
-public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>],
+@MainActor public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>],
                                     name: String? = nil,
                                     record: Bool? = nil,
                                     timeout: TimeInterval = 5,
@@ -100,6 +100,7 @@ public func snapshot<Value, Format>(on strategies: [Snapshotting<Value, Format>]
     )
 }
 
+@MainActor
 public func snapshot<Value, Format>(as strategies: [Snapshotting<Value, Format>],
                                     name: String? = nil,
                                     record: Bool? = nil,
@@ -117,6 +118,7 @@ public func snapshot<Value, Format>(as strategies: [Snapshotting<Value, Format>]
     )
 }
 
+@MainActor
 public func == <Value, Format>(lhs: SyncExpectation<Value>, rhs: Snapshot<Value, Format>) {
     lhs.to(haveValidSnapshot(as: rhs.strategies,
                              named: rhs.name,
