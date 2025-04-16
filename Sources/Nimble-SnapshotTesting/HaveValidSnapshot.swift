@@ -39,7 +39,7 @@ enum Counter {
 ///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
 ///   - function: The function name. This is used as a fallback if the currently running test is not found
 /// - Returns: A matcher to use in Nimble
-public func haveValidSnapshot<Value, Format>(
+@MainActor public func haveValidSnapshot<Value, Format>(
     as strategy: Snapshotting<Value, Format>,
     named name: String? = nil,
     record: Bool? = nil,
@@ -74,7 +74,7 @@ public func haveValidSnapshot<Value, Format>(
 ///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
 ///   - function: The function name. This is used as a fallback if the currently running test is not found
 /// - Returns: A matcher to use in Nimble
-public func haveValidSnapshot<Value, Format>(
+@MainActor public func haveValidSnapshot<Value, Format>(
     as strategies: [Snapshotting<Value, Format>],
     named name: String? = nil,
     record: Bool? = nil,
@@ -174,7 +174,7 @@ public extension SyncExpectation {
 ///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
 ///   - function: The function name. This is used as a fallback if the currently running test is not found
 /// - Returns: A matcher to use in Nimble
-public func haveValidSnapshot<Value, Format>(
+@MainActor public func haveValidSnapshot<Value, Format>(
     as strategy: Snapshotting<Value, Format>,
     named name: String? = nil,
     record: Bool? = nil,
@@ -240,7 +240,7 @@ private func testCaseIdentifier(line: UInt) -> String {
 ///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
 ///   - function: The function name. This is used as a fallback if the currently running test is not found
 /// - Returns: A matcher to use in Nimble
-public func haveValidSnapshot<Value, Format>(
+@MainActor public func haveValidSnapshot<Value, Format>(
     as strategies: [Snapshotting<Value, Format>],
     named name: String? = nil,
     record: Bool? = nil,
