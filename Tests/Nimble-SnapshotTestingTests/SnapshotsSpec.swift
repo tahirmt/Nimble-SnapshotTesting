@@ -15,25 +15,25 @@ import SwiftUI
 import XCTest
 
 @available(iOS 14.0, *)
-final class SnapshotsSpecs: QuickSpec {
+final class SnapshotsSpecs: AsyncSpec {
     override class func spec() {
         describe("a SnapshotSpec") {
             context("recording snapshots") {
-                it("shoud record") {
+                it("shoud record") { @MainActor in
                     let testLabel = UILabel()
                     testLabel.text = "Hello World"
 
                     expect(testLabel).to(haveValidSnapshot(as: .image))
                 }
 
-                it("should support == syntax") {
+                it("should support == syntax") { @MainActor in
                     let other = UILabel()
                     other.text = "Hello testing"
                     
                     expect(other) == snapshot(as: .image)
                 }
 
-                it("should work with toEventually") {
+                it("should work with toEventually") { @MainActor in
                     let other = UILabel()
                     other.text = "Hello testing"
 
@@ -41,23 +41,23 @@ final class SnapshotsSpecs: QuickSpec {
                         other.text = "Hello testing again"
                     }
 
-                    expect(other).toEventually(haveValidSnapshot(as: .image))
+                    await expect(other).toEventually(haveValidSnapshot(as: .image))
                 }
 
-                it("should record snapshot of a codable") {
+                it("should record snapshot of a codable") { @MainActor in
                     let object = TestCodable(stringValue: "What is the meaning of life", number: 42)
 
                     expect(object) == snapshot(as: .json)
                 }
 
-                it("should record snapshot of a SwiftUI view") {
+                it("should record snapshot of a SwiftUI view") { @MainActor in
                     let view = TestView()
                         .frame(width: 200, height: 50, alignment: .center)
 
                     expect(view).to(haveValidSnapshot(as: .image))
                 }
 
-                it("should record window") {
+                it("should record window") { @MainActor in
                     let window = UIWindow()
                     window.backgroundColor = .white
                     window.isHidden = false
@@ -74,7 +74,7 @@ final class SnapshotsSpecs: QuickSpec {
                     expect(window).to(haveValidSnapshot(as: .image))
                 }
 
-                it("should record window without root") {
+                it("should record window without root") { @MainActor in
                     let window = UIWindow()
                     window.backgroundColor = .white
                     window.isHidden = false
