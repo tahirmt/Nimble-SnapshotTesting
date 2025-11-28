@@ -118,50 +118,6 @@ enum Counter {
 
 // MARK: - toEventually helpers
 
-public extension PollingDefaults {
-    /// Default poll interval used for snapshot `toEventuallyIfTestingSnapshot` expectation.
-    static var snapshotPollInterval: NimbleTimeInterval = .milliseconds(200)
-}
-
-public extension SyncExpectation {
-    /// Uses `toEventually` to test the matcher only if the snapshot global recording mode is turned off. If the recording mode is on it will use a `to` expectation with the `recordingDelay`.
-    /// - Parameters:
-    ///   - matcher: The matcher to evaluate. Ideally, we should only use the `haveValidSnapshot` matcher here with a `recordingDelay`
-    ///   - timeout: The timeout for the test
-    ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
-    ///   - description: Additional description for the test
-    @available(*, noasync, message: "the sync version of `toEventuallyIfTestingSnapshots` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    func toEventuallyIfTestingSnapshots(_ matcher: Matcher<Value>,
-                                        timeout: NimbleTimeInterval = PollingDefaults.timeout,
-                                        pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
-                                        description: String? = nil) {
-        if isRecordingSnapshots == true {
-            to(matcher, description: description)
-        }
-        else {
-            toEventually(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
-        }
-    }
-
-    /// Uses `toEventually` to test the matcher only if the snapshot global recording mode is turned off. If the recording mode is on it will use a `to` expectation with the `recordingDelay`.
-    /// - Parameters:
-    ///   - matcher: The matcher to evaluate. Ideally, we should only use the `haveValidSnapshot` matcher here with a `recordingDelay`
-    ///   - timeout: The timeout for the test
-    ///   - pollInterval: The polling interval for the test. It uses `AsyncDefaults.snapshotPollInterval` as the default
-    ///   - description: Additional description for the test
-    func toEventuallyIfTestingSnapshots(_ matcher: Matcher<Value>,
-                                        timeout: NimbleTimeInterval = PollingDefaults.timeout,
-                                        pollInterval: NimbleTimeInterval = PollingDefaults.snapshotPollInterval,
-                                        description: String? = nil) async {
-        if isRecordingSnapshots == true {
-            to(matcher, description: description)
-        }
-        else {
-            await toEventually(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
-        }
-    }
-}
-
 /// Validates the given `Value` using the `strategy` against a pre-recorded snapshot or records a new snapshot
 /// - Parameters:
 ///   - strategy: Recording strategy for the given `Value`
