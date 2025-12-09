@@ -116,44 +116,6 @@ enum Counter {
     }
 }
 
-// MARK: - toEventually helpers
-
-/// Validates the given `Value` using the `strategy` against a pre-recorded snapshot or records a new snapshot
-/// - Parameters:
-///   - strategy: Recording strategy for the given `Value`
-///   - name: The name of the snapshot. If not provided, it will be automatically created
-///   - record: Whether or not to turn on recording mode for this test
-///   - recordDelay: The delay for recording when recording mode is on. This does not apply when snapshot does not exist and recording mode is off.///   - snapshotDirectory: Optional directory to save snapshots. By default snapshots will be saved in a directory with the same name as the test file, and that directory will sit inside a directory `__Snapshots__` that sits next to your test file.
-///   - timeout: The amount of time a snapshot must be generated in.
-///   - file: The file in which failure occurred. Defaults to the file name of the test case in which this function was called.
-///   - testName: The name of the test in which failure occurred. Defaults to a sanitized name based on the quick context.
-///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
-///   - function: The function name. This is used as a fallback if the currently running test is not found
-/// - Returns: A matcher to use in Nimble
-@MainActor public func haveValidSnapshot<Value, Format>(
-    as strategy: Snapshotting<Value, Format>,
-    named name: String? = nil,
-    record: Bool? = nil,
-    recordDelay: TimeInterval,
-    snapshotDirectory: String? = nil,
-    timeout: TimeInterval = 5,
-    file: StaticString = #file,
-    testName: String? = nil,
-    line: UInt = #line,
-    function: String = #function
-) -> Matcher<Value> {
-    haveValidSnapshot(as: [strategy],
-                      named: name,
-                      record: isRecordingSnapshots ?? record,
-                      recordDelay: recordDelay,
-                      snapshotDirectory: snapshotDirectory,
-                      timeout: timeout,
-                      file: file,
-                      testName: testName,
-                      line: line,
-                      function: function)
-}
-
 /// Returns a unique count for the test case. This number is incremented for each test in a test case but not if the test originated from the same line.
 /// - Parameter line: The line the test executed from
 /// - Returns: a unique identifier for this particular test run
@@ -182,54 +144,3 @@ private func testCaseIdentifier(line: UInt) -> String {
 
     return "\(count)"
 }
-
-/// Validates the given `Value` using the `strategy` against a pre-recorded snapshot or records a new snapshot
-/// - Parameters:
-///   - strategy: Recording strategy for the given `Value`
-///   - name: The name of the snapshot. If not provided, it will be automatically created
-///   - record: Whether or not to turn on recording mode for this test
-///   - recordDelay: The delay for recording when recording mode is on. This does not apply when snapshot does not exist and recording mode is off.
-///   - snapshotDirectory: Optional directory to save snapshots. By default snapshots will be saved in a directory with the same name as the test file, and that directory will sit inside a directory `__Snapshots__` that sits next to your test file.
-///   - timeout: The amount of time a snapshot must be generated in.
-///   - file: The file in which failure occurred. Defaults to the file name of the test case in which this function was called.
-///   - testName: The name of the test in which failure occurred. Defaults to a sanitized name based on the quick context.
-///   - line: The line number on which failure occurred. Defaults to the line number on which this function was called.
-///   - function: The function name. This is used as a fallback if the currently running test is not found
-/// - Returns: A matcher to use in Nimble
-@MainActor public func haveValidSnapshot<Value, Format>(
-    as strategies: [Snapshotting<Value, Format>],
-    named name: String? = nil,
-    record: Bool? = nil,
-    recordDelay: TimeInterval,
-    snapshotDirectory: String? = nil,
-    timeout: TimeInterval = 5,
-    file: StaticString = #file,
-    testName: String? = nil,
-    line: UInt = #line,
-    function: String = #function
-) -> Matcher<Value> {
-
-    if (isRecordingSnapshots ?? record) == true {
-        return haveValidSnapshot(as: strategies.map { .wait(for: recordDelay, on: $0) },
-                                 named: name,
-                                 record: isRecordingSnapshots ?? record,
-                                 snapshotDirectory: snapshotDirectory,
-                                 timeout: timeout,
-                                 file: file,
-                                 testName: testName,
-                                 line: line,
-                                 function: function)
-    }
-    else {
-        return haveValidSnapshot(as: strategies,
-                                 named: name,
-                                 record: isRecordingSnapshots ?? record,
-                                 snapshotDirectory: snapshotDirectory,
-                                 timeout: timeout,
-                                 file: file,
-                                 testName: testName,
-                                 line: line,
-                                 function: function)
-    }
-}
-
